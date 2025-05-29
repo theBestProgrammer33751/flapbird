@@ -49,6 +49,7 @@ public class Bird {
   }
 
   public void update() {
+	velocity = 0;
     velocity += gravity;
     
     if(velocity > 10) {
@@ -62,7 +63,7 @@ public class Bird {
     gravity -= lift;
     velocity = gravity;
     if(velocity < -10) {
-      velocity = -10;
+      velocity = 10;
     }
   }
   public void draw(Graphics g) {

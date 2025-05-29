@@ -22,7 +22,7 @@ public class App extends JPanel implements ActionListener { // *** NEW: Implemen
 	private final int WINDOW_LENGTH = 600;         
 
 	public App() {
-		bird = new Bird(WINDOW_WIDTH / 2 - 15, WINDOW_LENGTH / 2 - 15, 30, 30, 2, 3, Color.RED);
+		bird = new Bird(WINDOW_WIDTH / 2 - 15, WINDOW_LENGTH / 2 - 15, 30, 30, 5, 10, Color.RED);
 		this.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_LENGTH));
 		this.setBackground(Color.CYAN);
 		this.setFocusable(true); // Ensures the panel can receive keyboard input
@@ -33,7 +33,14 @@ public class App extends JPanel implements ActionListener { // *** NEW: Implemen
                 if(e.getKeyCode() == KeyEvent.VK_SPACE) {
                 	System.out.println("jump");
                     bird.jump(); // Calls the jump method on your Bird object
+
                 }
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {
+            	if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+            		bird.update();
+            	}
             }
         });
 
