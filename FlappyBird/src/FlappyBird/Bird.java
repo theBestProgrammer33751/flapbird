@@ -35,7 +35,7 @@ public class Bird {
   private Color color;
   private Rectangle hitBox;
 
-  public Bird(int x, int y, int width, int height, double gravity, double lift, Color color) {
+  public Bird(int x, int y, int width, int height, int gravity, int lift, Color color) {
     this.x = x;
     this.y = y;
     this.width = width;
@@ -59,7 +59,8 @@ public class Bird {
   }
 
   public void jump() {
-    velocity -= lift;
+    gravity -= lift;
+    velocity = gravity;
     if(velocity < -10) {
       velocity = -10;
     }

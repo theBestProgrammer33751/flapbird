@@ -19,18 +19,19 @@ public class App extends JPanel implements ActionListener { // *** NEW: Implemen
 	private Bird bird;
 	private Timer gameTimer;
 	private final int WINDOW_WIDTH = 400;
-	private final int WINDOW_LENGTH = 600;
+	private final int WINDOW_LENGTH = 600;         
 
 	public App() {
-		bird = new Bird(WINDOW_WIDTH / 2 - 15, WINDOW_LENGTH / 2 - 15, 30, 30, 0.9, 0.7, Color.RED);
+		bird = new Bird(WINDOW_WIDTH / 2 - 15, WINDOW_LENGTH / 2 - 15, 30, 30, 2, 3, Color.RED);
 		this.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_LENGTH));
 		this.setBackground(Color.CYAN);
 		this.setFocusable(true); // Ensures the panel can receive keyboard input
 
 		this.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyPressed(KeyEvent e) {
+            public void keyPressed(KeyEvent e) {  
                 if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+                	System.out.println("jump");
                     bird.jump(); // Calls the jump method on your Bird object
                 }
             }
@@ -43,14 +44,13 @@ public class App extends JPanel implements ActionListener { // *** NEW: Implemen
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); // Always call this first for proper Swing rendering
-        bird.draw(g); // *** NEW: Draw your bird object on the screen ***
-        // You'll add more drawing code here later for pipes, score, etc.
+        bird.draw(g); 
     }
 
     @Override // *** NEW: This method is required by the ActionListener interface ***
     public void actionPerformed(ActionEvent e) {
         // This method is called repeatedly by the 'gameTimer' (every 20 milliseconds)
-        bird.update(); // Assumes your Bird class has an update() method to handle gravity/movement
+        bird.update();
         // In here, you will later add logic for:
         // - Moving pipes across the screen
         // - Checking for collisions between the bird and pipes/ground
