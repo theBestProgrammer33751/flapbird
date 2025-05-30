@@ -22,7 +22,7 @@ public class App extends JPanel implements ActionListener { // *** NEW: Implemen
 	private final int WINDOW_LENGTH = 600;         
 
 	public App() {
-		bird = new Bird(WINDOW_WIDTH / 2 - 15, WINDOW_LENGTH / 2 - 15, 30, 30, 5, 10, Color.RED);
+		bird = new Bird(WINDOW_WIDTH / 2 - 15, WINDOW_LENGTH / 2 - 15, 30, 30, 5, 15, Color.RED);
 		this.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_LENGTH));
 		this.setBackground(Color.CYAN);
 		this.setFocusable(true); // Ensures the panel can receive keyboard input
@@ -36,15 +36,16 @@ public class App extends JPanel implements ActionListener { // *** NEW: Implemen
 
                 }
             }
-            @Override
+            @Override                                                                       
             public void keyReleased(KeyEvent e) {
             	if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+            		System.out.println("released");
             		bird.update();
             	}
             }
         });
 
-		gameTimer = new Timer(20, this); // 'this' refers to this App object, now an ActionListener
+		gameTimer = new Timer(30, this); // 'this' refers to this App object, now an ActionListener
 		gameTimer.start(); 
 	}
 
@@ -63,7 +64,14 @@ public class App extends JPanel implements ActionListener { // *** NEW: Implemen
         // - Checking for collisions between the bird and pipes/ground
         // - Updating the player's score
         // - Handling game over conditions
-
+        if(bird.getY() < 0) {
+        	bird.setY(0);
+        	bird.setVelocity(0);
+        }
+        if(bird.getY() > 570) {
+        	bird.setY(550);
+        	bird.setVelocity(0);
+        }
         repaint(); // Tells Swing to redraw the panel, which in turn calls paintComponent()
     }
    

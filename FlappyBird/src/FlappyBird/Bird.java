@@ -29,9 +29,9 @@ public class Bird {
   private int y;
   private int width;
   private int height;
-  private double velocity;
-  private double gravity;
-  private double lift;
+  private int velocity;
+  private int gravity;
+  private int lift;
   private Color color;
   private Rectangle hitBox;
 
@@ -49,22 +49,22 @@ public class Bird {
   }
 
   public void update() {
-	velocity = 0;
     velocity += gravity;
     
     if(velocity > 10) {
       velocity = 10;
     }
+    if(velocity < -10) {
+        velocity = 10;
+      }
     y += velocity;
     hitBox.y = y;
+    System.out.println(y);
   }
 
   public void jump() {
-    gravity -= lift;
-    velocity = gravity;
-    if(velocity < -10) {
-      velocity = 10;
-    }
+    velocity = -lift;
+   
   }
   public void draw(Graphics g) {
     g.setColor(color);
@@ -95,5 +95,16 @@ public class Bird {
   public int getHeight() {
     return height;
   }
+  public int getVelocity() {
+	  return velocity;
+  }
+  public void setVelocty(int newValue) {
+	  velocity = newValue;
+  }
+
+public void setVelocity(int i) {
+	// TODO Auto-generated method stub
+	velocity = i;
+}
   
 }
