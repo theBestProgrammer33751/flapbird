@@ -1,15 +1,21 @@
 package FlappyBird;
 
 import FlappyBird.Bird; // Assuming your Bird class is in the same package
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+import java.util.Random;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener; // *** NEW: Import ActionListener ***
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -20,11 +26,12 @@ public class App extends JPanel implements ActionListener { // *** NEW: Implemen
 	private Timer gameTimer;
 	private final int WINDOW_WIDTH = 400;
 	private final int WINDOW_LENGTH = 600;         
-
+	Image background;
+	
 	public App() {
 		bird = new Bird(WINDOW_WIDTH / 2 - 15, WINDOW_LENGTH / 2 - 15, 30, 30, 5, 15, Color.RED);
 		this.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_LENGTH));
-		this.setBackground(Color.CYAN);
+		background = new ImageIcon(getClass().getResource("/.flappyBirdBG.jpg")).getImage();
 		this.setFocusable(true); // Ensures the panel can receive keyboard input
 
 		this.addKeyListener(new KeyAdapter() {
@@ -45,11 +52,16 @@ public class App extends JPanel implements ActionListener { // *** NEW: Implemen
             }
         });
 
-		gameTimer = new Timer(30, this); // 'this' refers to this App object, now an ActionListener
+		gameTimer = new Timer(45, this); // 'this' refers to this App object, now an ActionListener
 		gameTimer.start(); 
 	}
 
-    @Override
+    private Color getImage(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); // Always call this first for proper Swing rendering
         bird.draw(g); 
