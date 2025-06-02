@@ -27,12 +27,14 @@ public class App extends JPanel implements ActionListener { // *** NEW: Implemen
 	private final int WINDOW_WIDTH = 400;
 	private final int WINDOW_LENGTH = 600;         
 	Image background;
+	boolean playerLost = false;
 	
 	public App() {
 		bird = new Bird(WINDOW_WIDTH / 2 - 15, WINDOW_LENGTH / 2 - 15, 30, 30, 5, 15, Color.RED);
 		this.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_LENGTH));
-		background = new ImageIcon(getClass().getResource("/.flappyBirdBG.jpg")).getImage();
+		//background = new ImageIcon(getClass().getResource("/.flappyBirdBG.jpg")).getImage();
 		this.setFocusable(true); // Ensures the panel can receive keyboard input
+		this.setBackground(Color.GREEN);
 
 		this.addKeyListener(new KeyAdapter() {
             @Override
@@ -65,6 +67,12 @@ public class App extends JPanel implements ActionListener { // *** NEW: Implemen
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); // Always call this first for proper Swing rendering
         bird.draw(g); 
+        if(playerLost == true) {
+        	g.setColor(Color.BLACK);
+        	g.setFont(new Font("Serif", Font.BOLD, 48));
+        	String loseMessage = "You Lost! Try Harder Next Time!";
+        	
+        }
     }
 
     @Override // *** NEW: This method is required by the ActionListener interface ***
@@ -81,9 +89,9 @@ public class App extends JPanel implements ActionListener { // *** NEW: Implemen
         	bird.setVelocity(0);
         }
         if(bird.getY() > 570) {
-        	bird.setY(550);
-        	bird.setVelocity(0);
+        	playerLost = true;
         }
+        
         repaint(); // Tells Swing to redraw the panel, which in turn calls paintComponent()
     }
    
